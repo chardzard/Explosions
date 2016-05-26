@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterMovement : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
     public float speed = 6f;            // The speed that the player will move at.
+    public GameObject bullet;
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
@@ -17,6 +18,15 @@ public class CharacterMovement : MonoBehaviour {
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
+    void Update() {
+        if (Input.GetButton("Fire1")) {
+            GameObject gun = transform.FindChild("Gun").gameObject;
+            if (gun != null) {
+                Transform gunEnd = gun.transform.FindChild("Gun End");
+                
+            }
+        }
+    }
 
     void FixedUpdate() {
         // Store the input axes.
