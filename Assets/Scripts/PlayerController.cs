@@ -4,18 +4,20 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 6f;            // The speed that the player will move at.
-    public GameObject bullet;
+    public Bullet bullet;
 
     Vector3 movement;                   // The vector to store the direction of the player's movement.
     Rigidbody playerRigidbody;          // Reference to the player's rigidbody.
     int floorMask;                      // A layer mask so that a ray can be cast just at gameobjects on the floor layer.
     float camRayLength = 100f;          // The length of the ray from the camera into the scene.
+    bool canFire;
 
     void Awake() {
         // Create a layer mask for the floor layer.
         floorMask = LayerMask.GetMask("Floor");
 
         playerRigidbody = GetComponent<Rigidbody>();
+        canFire = true;
     }
 
     void Update() {
@@ -23,9 +25,28 @@ public class PlayerController : MonoBehaviour {
             GameObject gun = transform.FindChild("Gun").gameObject;
             if (gun != null) {
                 Transform gunEnd = gun.transform.FindChild("Gun End");
-                
+                Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                // Create a RaycastHit variable to store information about what was hit by the ray.
+                RaycastHit floorHit;
+
+                // Perform the raycast and if it hits something on the floor layer...
+                if (canFire && Physics.Raycast(camRay, out floorHit, camRayLength)) {
+                    Bullet proj = (Bullet) Instantiate(bullet, gunEnd.position, Quaternion.identity);
+                    Vector3 target = floorHit.point;
+                    target.y = 1.25f;
+                    proj.transform.LookAt(target);
+                    proj.MyRigidBody.velocity = proj.transform.forward * 25 + (movement * 10);
+                    canFire = false;
+                    StartCoroutine(waitBetweenBullets());
+                }
             }
         }
+    }
+
+    IEnumerator waitBetweenBullets() {
+        yield return new WaitForSeconds(.25f);
+        canFire = true;
     }
 
     void FixedUpdate() {
