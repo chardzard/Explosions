@@ -14,10 +14,11 @@ public class Bullet : MonoBehaviour {
     // Use this for initialization
     void Awake() {
         MyRigidBody = GetComponent<Rigidbody>();
+        StartCoroutine(destroy());
     }
 
-    // Update is called once per frame
-    void Update() {
-
+    IEnumerator destroy() {
+        yield return new WaitForSeconds(5f);
+        Destroy(gameObject);
     }
 }
