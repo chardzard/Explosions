@@ -462,6 +462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   health: 3
+  controller: {fileID: 0}
+  explosion: {fileID: 157104, guid: fac7c70b360bfec49a22442c018b7628, type: 2}
 --- !u!114 &11450194
 MonoBehaviour:
   m_ObjectHideFlags: 1
