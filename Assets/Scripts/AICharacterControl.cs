@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
-{
+namespace UnityStandardAssets.Characters.ThirdPerson {
     [RequireComponent(typeof (NavMeshAgent))]
     [RequireComponent(typeof (ThirdPersonCharacter))]
     public class AICharacterControl : MonoBehaviour
@@ -15,7 +13,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Start()
         {
-            // get the components on the object we need ( should not be null due to require component so no need to check )
             agent = GetComponentInChildren<NavMeshAgent>();
             character = GetComponent<ThirdPersonCharacter>();
 
@@ -42,13 +39,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 
         void OnTriggerEnter(Collider collide) {
-            Destroy(collide.gameObject);
-            health -= 1;
-            print(health);
-            if(health <= 0) {
-                print("dead");
-                Destroy(gameObject);
-            }
+            Bullet hit = collide.GetComponent<Bullet>();
+            if(hit != null) {
+                hit.Explode();
+                Destroy(collide.gameObject);
+                if (--health <= 0) {
+                    Destroy(gameObject);
+                }
+            }           
         }
     }
 }
