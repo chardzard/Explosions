@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
                     Vector3 target = floorHit.point;
                     target.y = 1.25f;
                     proj.transform.LookAt(target);
-                    proj.MyRigidBody.velocity = proj.transform.forward * 25 + (movement * 10);
+                    proj.MyRigidBody.velocity = proj.transform.forward * 35 + (movement * 10);
                     canFire = false;
                     StartCoroutine(waitBetweenBullets());
                 }
