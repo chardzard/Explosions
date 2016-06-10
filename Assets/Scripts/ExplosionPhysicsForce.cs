@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace UnityStandardAssets.Effects
 {
@@ -27,10 +28,14 @@ namespace UnityStandardAssets.Effects
                 {
                     rigidbodies.Add(col.attachedRigidbody);
                 }
+                AICharacterControl AI = col.GetComponent<AICharacterControl>();
+                if (AI != null) {
+                    AI.Damage(1);
+                }                
             }
             foreach (var rb in rigidbodies)
             {
-                rb.AddExplosionForce(explosionForce*multiplier, transform.position, r, 1*multiplier, ForceMode.Impulse);
+                rb.AddExplosionForce(explosionForce*multiplier, transform.position, r, 0, ForceMode.Impulse);
             }
         }
     }

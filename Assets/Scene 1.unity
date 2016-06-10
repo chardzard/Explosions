@@ -510,6 +510,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e6cb0c202e69524193cee865b5f5605, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnInterval: 0.5
+  difficulty: 1
+  playerPosition: {fileID: 2097101323}
   spawnPoints:
   - {fileID: 572566683}
   - {fileID: 751073794}
@@ -541,7 +544,7 @@ GameObject:
   - 23: {fileID: 1483273408}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -615,7 +618,7 @@ GameObject:
   - 4: {fileID: 1535125610}
   m_Layer: 0
   m_Name: Gun End
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -846,7 +849,7 @@ GameObject:
   - 114: {fileID: 2097101318}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -38,15 +38,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson {
             this.target = target;
         }
 
-        void OnTriggerEnter(Collider collide) {
-            Bullet hit = collide.GetComponent<Bullet>();
-            if(hit != null) {
-                hit.Explode();
-                Destroy(collide.gameObject);
-                if (--health <= 0) {
-                    Destroy(gameObject);
-                }
-            }           
+        public void Damage(int damage) {
+            health -= damage;
+            if (health <= 0) {
+                Destroy(gameObject);
+            }
         }
     }
 }

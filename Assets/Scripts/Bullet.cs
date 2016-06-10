@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
     Rigidbody myRigidBody;
     Vector3 target;
 
+    public GameObject explosion;
+
     public Rigidbody MyRigidBody {
         get { return myRigidBody; }
         set { myRigidBody = value; }
@@ -20,9 +22,13 @@ public class Bullet : MonoBehaviour {
     IEnumerator destroy() {
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
+        Instantiate(explosion, transform.position, Quaternion.identity);
     }
 
-    public void Explode() {
-        
+    void OnCollisionEnter(Collision collide) {
+        if (!collide.gameObject.CompareTag("Player")) {
+            Destroy(gameObject);
+            Instantiate(explosion, transform.position, Quaternion.identity);
+        }
     }
 }
